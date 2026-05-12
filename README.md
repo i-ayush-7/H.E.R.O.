@@ -4,13 +4,12 @@
 
 ### Health Entity Rendering Orchestrator
 
-**Transforming raw FHIR healthcare records into an interactive 3D Clinical Digital Twin**
+**An intelligent A2A Agent and MCP Server that transforms raw FHIR healthcare records into actionable clinical insights**
 
-[![MCP Protocol](https://img.shields.io/badge/MCP-SSE%20Transport-00B4D8?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTEyIDJMMiA3bDEwIDUgMTAtNS0xMC01ek0yIDE3bDEwIDUgMTAtNS0xMC01LTEwIDV6TTIgMTJsMTAgNSAxMC01LTEwLTUtMTAgNXoiLz48L3N2Zz4=)](https://modelcontextprotocol.io)
+[![MCP Protocol](https://img.shields.io/badge/MCP-SSE%20Transport-00B4D8?style=for-the-badge)](https://modelcontextprotocol.io)
 [![A2A Protocol](https://img.shields.io/badge/A2A-Agent_to_Agent-7B2FF7?style=for-the-badge)](https://google.github.io/A2A/)
 [![FHIR R4](https://img.shields.io/badge/FHIR-R4%20Compliant-E63946?style=for-the-badge)](https://hl7.org/fhir/)
 [![Platform](https://img.shields.io/badge/Prompt_Opinion-Integrated-1A1A2E?style=for-the-badge)](https://promptopinion.com)
-[![Three.js](https://img.shields.io/badge/Three.js-3D_Visualization-000000?style=for-the-badge&logo=three.js)](https://threejs.org)
 
 ---
 
@@ -28,9 +27,9 @@ Healthcare data is fragmented, deeply nested, and impossible to interpret at a g
 
 ## The Solution
 
-**H.E.R.O.** bridges that gap by orchestrating specialized AI agents that ingest raw FHIR data and render it as a real-time, interactive **3D Clinical Digital Twin** — a visual command center where conditions light up on a human body model, vitals pulse in real-time, and clinical intelligence is delivered instantly.
+**H.E.R.O.** bridges that gap by orchestrating specialized AI agents that ingest raw FHIR data and deliver structured, actionable clinical intelligence — mapping conditions to body systems, flagging abnormal vitals, and surfacing risk patterns instantly.
 
-> HERO bridges the gap between raw healthcare data and actionable clinical insights by translating complex FHIR records into an interactive 3D digital twin. By orchestrating specialized MCP tools, it transforms a static patient history into a real-time, visual command center.
+> HERO bridges the gap between raw healthcare data and actionable clinical insights by translating complex FHIR records into structured clinical analysis. By orchestrating specialized MCP tools, it transforms a static patient history into a real-time clinical command center.
 
 ---
 
@@ -39,38 +38,36 @@ Healthcare data is fragmented, deeply nested, and impossible to interpret at a g
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
 │                        PROMPT OPINION PLATFORM                       │
+│                                                                      │
 │  ┌─────────────┐    ┌──────────────────────────────────────────┐    │
 │  │  Patient DB  │───▶│         HERO A2A Agent (Layer B)         │    │
-│  │  (FHIR R4)   │    │  • Clinical analysis & triage            │    │
-│  └─────────────┘    │  • Condition-to-anatomy mapping           │    │
-│                      │  • Risk flag generation                   │    │
+│  │  (FHIR R4)   │    │                                          │    │
+│  └─────────────┘    │  • Structured clinical analysis           │    │
+│                      │  • Condition-to-body-system mapping       │    │
+│                      │  • Vital sign assessment & flagging       │    │
+│                      │  • Cross-condition risk identification    │    │
 │                      └────────────────┬─────────────────────────┘    │
+│                                       │                              │
 │                                       │ MCP Protocol (SSE)           │
+│                                       │                              │
 │                      ┌────────────────▼─────────────────────────┐    │
 │                      │      FHIR MCP Server (Layer A)            │    │
+│                      │                                           │    │
 │                      │  ┌─────────────────────────────────────┐  │    │
 │                      │  │  patient_vitals_tool                 │  │    │
 │                      │  │  → HR, BP, SpO2, RR parsing          │  │    │
+│                      │  │  → LOINC code matching               │  │    │
 │                      │  ├─────────────────────────────────────┤  │    │
 │                      │  │  patient_conditions_tool             │  │    │
 │                      │  │  → Active SNOMED/ICD-10 extraction   │  │    │
+│                      │  │  → Clinical status filtering         │  │    │
 │                      │  ├─────────────────────────────────────┤  │    │
 │                      │  │  SHARP Context Handler               │  │    │
 │                      │  │  → Secure token propagation          │  │    │
+│                      │  │  → Patient ID resolution             │  │    │
 │                      │  └─────────────────────────────────────┘  │    │
 │                      └───────────────────────────────────────────┘    │
-└──────────────────────────────────────────────────────────────────────┘
-                                    │
-                            WebSocket (ws://8765)
-                                    │
-┌───────────────────────────────────▼──────────────────────────────────┐
-│                     3D DIGITAL TWIN UI (Layer C)                     │
-│  ┌──────────────────────────────┐  ┌─────────────────────────────┐  │
-│  │    Three.js / R3F Canvas     │  │     Clinical Data Panel     │  │
-│  │  • Procedural human body     │  │  • Real-time vitals         │  │
-│  │  • Dynamic neon highlights   │  │  • Active conditions list   │  │
-│  │  • Orbit camera controls     │  │  • Glassmorphism UI         │  │
-│  └──────────────────────────────┘  └─────────────────────────────┘  │
+│                                                                      │
 └──────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -80,26 +77,17 @@ Healthcare data is fragmented, deeply nested, and impossible to interpret at a g
 
 ```
 H.E.R.O./
-├── fhir-mcp-server/          # Layer A — MCP Server (Python)
-│   ├── server.py              # SSE transport server (Starlette + Uvicorn)
-│   ├── patient_vitals_tool.py # FHIR Observation parser (LOINC-coded vitals)
-│   ├── patient_conditions_tool.py  # FHIR Condition parser (active dx filter)
-│   └── fhir_context.py        # SHARP context handler (token propagation)
+├── fhir-mcp-server/                # Layer A — MCP Server (Python)
+│   ├── server.py                    # SSE transport server (Starlette + Uvicorn)
+│   ├── patient_vitals_tool.py       # FHIR Observation parser (LOINC-coded vitals)
+│   ├── patient_conditions_tool.py   # FHIR Condition parser (active dx filter)
+│   └── fhir_context.py             # SHARP context handler (token propagation)
 │
-├── fhir-a2a-agent/            # Layer B — A2A Orchestrator Agent (Python)
-│   └── orchestrator.py        # Clinical twin agent + WebSocket broadcaster
+├── fhir-a2a-agent/                  # Layer B — A2A Orchestrator Agent (Python)
+│   └── orchestrator.py             # Clinical twin agent + state broadcaster
 │
-├── fhir-3d-twin/              # Layer C — 3D Digital Twin UI (React)
-│   ├── src/
-│   │   ├── App.jsx            # Main layout — canvas + clinical panel
-│   │   ├── components/
-│   │   │   ├── HumanBody.jsx  # Procedural 3D wireframe human body
-│   │   │   └── DataPanel.jsx  # Real-time vitals & conditions display
-│   │   └── App.css            # Dark mode clinical control center styles
-│   └── package.json
-│
-├── generate_patient_report.py  # Demo patient report generator (PDF)
-├── Priya_Sharma_Clinical_Report.pdf  # Sample clinical report
+├── generate_patient_report.py       # Demo patient report generator (PDF)
+├── Priya_Sharma_Clinical_Report.pdf # Sample clinical discharge summary
 └── README.md
 ```
 
@@ -108,28 +96,46 @@ H.E.R.O./
 ## Key Features
 
 ### Layer A — FHIR MCP Server
-- **Protocol**: Model Context Protocol over HTTP/SSE transport
-- **Endpoints**: `GET /sse` (event stream) · `POST /messages/` (JSON-RPC)
-- **Tools Exposed**:
-  - `patient_vitals_tool` — Parses FHIR Observation bundles, extracts Heart Rate, Blood Pressure (Systolic/Diastolic), and SpO2 using LOINC code matching
-  - `patient_conditions_tool` — Filters FHIR Condition bundles for `clinicalStatus.coding[0].code === 'active'`, returns clean condition display names
-- **Security**: SHARP (Secure Healthcare Agent Request Protocol) context handler for token propagation without bespoke token vaults
+
+The MCP Server exposes healthcare data tools over the **Model Context Protocol** using HTTP/SSE transport, allowing any MCP-compatible agent to query patient records.
+
+| Component | Description |
+|---|---|
+| **Transport** | HTTP/SSE — `GET /sse` (event stream) · `POST /messages/` (JSON-RPC) |
+| **Health Check** | `GET /` returns server status JSON |
+| **Security** | DNS rebinding protection disabled for tunnel compatibility |
+
+**Tools Exposed:**
+
+- **`patient_vitals_tool`** — Parses FHIR R4 `Observation` bundles. Extracts Heart Rate, Blood Pressure (Systolic & Diastolic), and Oxygen Saturation (SpO2) by matching LOINC codes (`8867-4`, `8480-6`, `8462-4`, `2708-6`). Returns normalized `{ value, unit }` objects.
+
+- **`patient_conditions_tool`** — Filters FHIR R4 `Condition` bundles for entries where `clinicalStatus.coding[0].code === 'active'`. Returns a clean list of condition display names from `code.coding[0].display`.
+
+**SHARP Context Handler:**
+- Implements the Secure Healthcare Agent Request Protocol specification
+- Extracts patient IDs and FHIR tokens propagated through multi-agent call chains
+- Supports both environment variable injection and MCP request metadata extraction
 
 ### Layer B — A2A Orchestrator Agent
-- **Framework**: Google ADK-compatible Agent-to-Agent architecture
-- **Role**: Receives parsed FHIR data from MCP tools, maps conditions to anatomical regions, generates consolidated UI state
-- **Output**: Real-time WebSocket broadcast of `{ vitals, conditions, highlighted_meshes }` to the frontend
-- **Condition → Anatomy Mapping**:
-  | Condition | Body System |
-  |---|---|
-  | Asthma, COPD, Bronchitis | Lungs (Respiratory) |
-  | Hypertension, Heart Disease | Heart (Cardiovascular) |
 
-### Layer C — 3D Digital Twin UI
-- **Stack**: React + Three.js (React Three Fiber) + Tailwind CSS
-- **Aesthetic**: Dark clinical control center with glassmorphism panels
-- **3D Canvas**: Procedural wireframe human body built from Three.js primitives with dynamic neon highlights that activate based on detected conditions
-- **Real-time**: WebSocket listener auto-updates vitals and condition highlights
+The orchestrator agent follows **Google ADK Agent-to-Agent** architecture patterns. It consumes parsed FHIR data from Layer A and produces structured clinical analysis.
+
+**Capabilities:**
+- Receives parsed FHIR data from MCP tools
+- Maps clinical conditions to anatomical body systems
+- Generates consolidated clinical state objects
+- Broadcasts real-time state updates via WebSocket
+
+**Condition → Body System Mapping:**
+
+| Condition Pattern | Body System |
+|---|---|
+| Asthma, COPD, Bronchitis, Pneumonia | Lungs (Respiratory) |
+| Hypertension, Coronary Disease, Arrhythmia | Heart (Cardiovascular) |
+| Diabetes, GI Disorders | Abdomen (Gastrointestinal) |
+| Migraines, Neurological Conditions | Head (Neurological) |
+| Arthritis, Musculoskeletal | Joints/Limbs |
+| Anemia, Autoimmune, Allergic | Systemic |
 
 ---
 
@@ -139,10 +145,9 @@ H.E.R.O./
 |---|---|---|
 | **MCP Server** | `fhir-mcp-server/server.py` — SSE transport, 2 FHIR tools | ✅ |
 | **A2A Agent** | `fhir-a2a-agent/orchestrator.py` — Google ADK orchestrator | ✅ |
-| **FHIR R4 Data** | LOINC-coded vitals + SNOMED/ICD-10 conditions parsing | ✅ |
-| **SHARP Spec** | `fhir_context.py` — Token propagation handler | ✅ |
+| **FHIR R4 Data** | LOINC-coded vitals + SNOMED/ICD-10 condition parsing | ✅ |
+| **SHARP Spec** | `fhir_context.py` — Secure token propagation handler | ✅ |
 | **Prompt Opinion Integration** | MCP Server registered via SSE, Agent configured on platform | ✅ |
-| **Interactive UI** | 3D Digital Twin with real-time WebSocket updates | ✅ |
 
 ---
 
@@ -150,7 +155,6 @@ H.E.R.O./
 
 ### Prerequisites
 - Python 3.11+
-- Node.js 18+
 - `pip install mcp uvicorn starlette websockets`
 
 ### 1. Start the MCP Server (Layer A)
@@ -158,9 +162,12 @@ H.E.R.O./
 cd fhir-mcp-server
 pip install mcp uvicorn starlette
 python server.py
-# Server runs on http://0.0.0.0:8000
-# SSE endpoint: GET /sse
-# Messages:     POST /messages/
+```
+```
+Server runs on http://0.0.0.0:8000
+  GET  /       → Health check (JSON)
+  GET  /sse    → SSE event stream
+  POST /messages/ → JSON-RPC messages
 ```
 
 ### 2. Start the A2A Orchestrator (Layer B)
@@ -168,28 +175,48 @@ python server.py
 cd fhir-a2a-agent
 pip install websockets
 python orchestrator.py
-# WebSocket server on ws://localhost:8765
+```
+```
+WebSocket server on ws://localhost:8765
 ```
 
-### 3. Start the 3D Digital Twin UI (Layer C)
-```bash
-cd fhir-3d-twin
-npm install
-npm run dev
-# React app on http://localhost:5173
-```
-
-### 4. Expose via ngrok (for Prompt Opinion)
+### 3. Expose via ngrok (for Prompt Opinion)
 ```bash
 ngrok http 8000
 # Use the generated HTTPS URL as the MCP Server endpoint in Prompt Opinion
+```
+
+### 4. Register on Prompt Opinion
+1. Navigate to **Configuration → MCP Servers**
+2. Set **Endpoint** to your ngrok HTTPS URL
+3. Set **Transport Type** to `SSE`
+4. Set **Authentication** to `No Authentication (Open)`
+5. Click **Continue** — tools will be auto-discovered
+
+---
+
+## HERO Agent System Prompt
+
+The A2A agent on Prompt Opinion uses this system prompt to drive clinical analysis:
+
+```
+You are HERO (Health Evidence & Risk Observer), an advanced Clinical Digital Twin AI agent.
+Your purpose is to analyze patient clinical data from FHIR-standard electronic health records
+and produce structured clinical intelligence.
+
+CORE BEHAVIOR:
+1. Always call patient_conditions_tool and patient_vitals_tool when patient context is available
+2. Present structured analysis: Patient Summary → Active Conditions → Vital Signs → Body System Mapping → Risk Flags → Recommendations
+3. Map conditions to anatomical regions (Asthma → Lungs, Hypertension → Heart, etc.)
+4. Cite LOINC codes for vitals and SNOMED/ICD-10 codes for conditions
+5. Flag critical values with ⚠️
 ```
 
 ---
 
 ## Demo Patient: Priya Sharma
 
-The included clinical report (`Priya_Sharma_Clinical_Report.pdf`) contains a complete discharge summary for a 24-year-old female patient with:
+The included clinical report (`Priya_Sharma_Clinical_Report.pdf`) is a professional discharge summary for testing:
 
 | Parameter | Value | Flag |
 |---|---|---|
@@ -199,8 +226,6 @@ The included clinical report (`Priya_Sharma_Clinical_Report.pdf`) contains a com
 | **SpO2** | 91% → 97% | LOW → Normal |
 | **Serum IgE** | 485 IU/mL (ref: <100) | HIGH |
 
-This data directly maps to the 3D Digital Twin — **Lungs** glow red (Asthma), **Heart** pulses with alert coloring (Hypertension).
-
 ---
 
 ## Technology Stack
@@ -209,7 +234,6 @@ This data directly maps to the 3D Digital Twin — **Lungs** glow red (Asthma), 
 |---|---|---|
 | MCP Server | Python, Starlette, Uvicorn, `mcp` SDK | FHIR tool hosting over SSE |
 | A2A Agent | Python, Google ADK concepts, WebSockets | Clinical orchestration |
-| 3D Frontend | React, Three.js, React Three Fiber, Tailwind CSS | Interactive visualization |
 | Tunnel | ngrok | External HTTPS exposure |
 | Platform | Prompt Opinion | Agent + MCP registration |
 | Data Standard | HL7 FHIR R4, LOINC, SNOMED CT, ICD-10 | Healthcare interoperability |
@@ -224,6 +248,6 @@ Built by **Ayush Shukla** for the **Agents Assemble: The Healthcare AI Endgame C
 
 <div align="center">
 
-**H.E.R.O.** — *Because healthcare data deserves to be seen, not just stored.*
+**H.E.R.O.** — *Because healthcare data deserves to be understood, not just stored.*
 
 </div>
